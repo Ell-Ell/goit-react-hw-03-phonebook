@@ -4,6 +4,7 @@ import Container from './components/Container';
 import ContactForm from './components/ContactForm';
 import Filter from './components/Filter';
 import ContactList from './components/ContactList';
+import ContactItem from './components/ContactItem';
 
 import { v4 as uuidv4 } from 'uuid';
 import './App.css';
@@ -74,6 +75,7 @@ class App extends Component {
             <h2 className="title">Contacts</h2>
             <Filter value={filter} onChange={this.changeFilter} />
             <ContactList
+              ListItem={ContactItem}
               contacts={filteredContacts}
               onDeleteContact={this.deleteContact}
             />

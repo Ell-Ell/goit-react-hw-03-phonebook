@@ -1,0 +1,38 @@
+.item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.name {
+  margin: 0;
+  margin-right: 10px;
+}
+
+.number {
+  margin: 0;
+  margin-right: 15px;
+}
+
+.button {
+  width: 100px;
+  margin: 0;
+  padding: 10px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  border-radius: 5%;
+
+  background-color: rgb(184, 237, 100);
+  color: white;
+
+  transition: background-color 0.2s cubic-bezier(0.17, 0.67, 0.83, 0.67),
+    color 0.2s cubic-bezier(0.17, 0.67, 0.83, 1),
+    transform 0.2s cubic-bezier(0.17, 0.67, 0.83, 0.67);
+}
+
+.button:hover {
+  border: 1px solid rgb(179, 10, 10);
+  background-color: white;
+  color: rgb(105, 216, 62);
+  transform: scale(1.1);
+}
