@@ -5,7 +5,7 @@ class Storage {
     this._storage = JSON.parse(this._ls.getItem(nameOfStorage));
 
     if (!this._storage) {
-      this._storage = [];
+      this._storage = this._resetStorage();
     }
   }
   _updateStorage() {
@@ -20,6 +20,7 @@ class Storage {
     ];
     this._ls.clear();
     this._ls.setItem(this._nameOfStorage, JSON.stringify(data));
+    return data;
   }
   set(value) {
     this._storage.push(value);
