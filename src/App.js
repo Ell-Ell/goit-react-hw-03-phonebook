@@ -5,25 +5,31 @@ import ContactForm from './components/ContactForm';
 import Filter from './components/Filter';
 import ContactList from './components/ContactList';
 import ContactItem from './components/ContactItem';
+import Storage from './components/Storage';
 
 import { v4 as uuidv4 } from 'uuid';
 import './App.css';
 
 class App extends Component {
-  state = {
-    contacts: [
-      { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-      { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
-      { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-      { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
-    ],
-    filter: '',
-  };
+  constructor(props) {
+    super(props);
+
+    this._storageContacts = new Storage('contacts');
+    this.state = {
+      contacts: this._storageContacts.getAll(),
+      filter: '',
+    };
+  }
 
   deleteContact = contactId => {
-    this.setState(prevState => ({
-      contacts: prevState.contacts.filter(contact => contact.id !== contactId),
+    this._storageContacts.remove('id', contactId);
+    this.setState(() => ({
+      contacts: this._storageContacts.getAll(),
     }));
+
+    // this.setState(prevState => ({
+    //   contacts: prevState.contacts.filter(contact => contact.id !== contactId),
+    // }));
   };
 
   formSubmitHandler = newContact => {
@@ -43,8 +49,12 @@ class App extends Component {
         number: newContact.number,
       };
 
-      this.setState(prevState => ({
-        contacts: [contact, ...prevState.contacts],
+      // this.setState(prevState => ({
+      //   contacts: [contact, ...prevState.contacts],
+      // }));
+      this._storageContacts.set(contact);
+      this.setState(() => ({
+        contacts: this._storageContacts.getAll(),
       }));
     }
   };
